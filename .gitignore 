@@ -1,0 +1,42 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# === Environments ===
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# === Flask cache & logs ===
+instance/
+*.log
+*.pid
+*.sqlite3
+
+# === Byte-compiled / temp ===
+*.bak
+*.swp
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.egg-info/
+
+# === Deployment & build ===
+dist/
+build/
+*.spec
+
+# === OS-specific ===
+ehthumbs.db
+desktop.ini
+
+# === Render / config ===
+*.sqlite
+*.db
+.cache/
