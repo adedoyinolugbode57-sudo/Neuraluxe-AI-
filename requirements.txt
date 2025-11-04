@@ -1,0 +1,93 @@
+# ===========================================================
+# 🌌 NeuraAI v10k Hyperluxe — Final Production Requirements
+# Compatible with async Flask, PostgreSQL, Uvicorn/Gunicorn
+# ===========================================================
+
+# --- Flask Core ---
+Flask>=2.2
+Flask-Cors
+Flask-Caching
+Flask-SQLAlchemy
+
+# --- Environment & Config ---
+python-dotenv
+requests
+httpx
+
+# --- Data Handling & Utilities ---
+pandas
+numpy
+beautifulsoup4
+lxml
+schedule
+pytz
+
+# --- Database & Storage ---
+SQLAlchemy
+psycopg2-binary
+asyncpg
+
+# --- AI / NLP Essentials (lightweight) ---
+scikit-learn
+nltk
+textblob
+emoji
+spacy
+
+# --- Voice & Speech ---
+gTTS
+pyttsx3
+edge-tts
+pydub
+
+# --- Background Tasks & Performance ---
+redis
+rq
+apscheduler
+
+# --- Security & Auth ---
+itsdangerous
+bcrypt
+cryptography
+
+# --- Web & API Tools ---
+aiohttp
+uvicorn
+gunicorn
+
+# --- Dev & Diagnostics ---
+colorama
+loguru
+
+# --- Optional Enhancements ---
+coingecko
+yfinance
+requests-cache
+
+# --- For News, Health, and Data APIs ---
+feedparser
+openmeteo-requests
+json5
+
+# --- Compression & Optimization ---
+brotli
+zstandard
+
+# --- File Handling & Parsing ---
+python-docx
+pdfminer.six
+pypdf2
+openpyxl
+
+# --- Image, Video, and Media ---
+pillow
+opencv-python-headless
+moviepy
+
+# --- Testing & Debugging ---
+pytest
+pytest-asyncio
+
+# --- CLI Tools ---
+click
+rich
