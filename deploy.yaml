@@ -1,0 +1,54 @@
+# ===========================================================
+# 🌌 Neuraluxe-AI v10k Hyperluxe — Deployra Configuration
+# ===========================================================
+
+services:
+  - type: web
+    name: neuraluxe-ai
+    env: python
+    plan: free
+    region: us-west
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: gunicorn main:app --workers=4 --threads=8 --timeout=120
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: SECRET_KEY
+        value: Joshua_Dav^-438@hote......ewsser!Greens£voltage%
+      - key: CACHE_TYPE
+        value: simple
+      - key: CACHE_DEFAULT_TIMEOUT
+        value: "300"
+      - key: OPENAI_ENABLED
+        value: "false"
+      - key: OPENAI_API_KEY
+        value: ""
+      - key: ENABLE_ENV_CHECK
+        value: "true"
+      - key: VOICE_ENGINE
+        value: gtts
+      - key: TTS_LANG
+        value: en
+      - key: LOG_LEVEL
+        value: info
+      - key: DATABASE_URL
+        value: postgresql://user:password@host:port/dbname
+    autoDeploy: true
+    healthCheckPath: /env/check
+
+    # Optional Disk for caching
+    disk:
+      name: cache
+      mountPath: /data
+      sizeGB: 1
+
+    # Filter build to only required files
+    buildFilter:
+      paths:
+        - main.py
+        - requirements.txt
+        - deploy.yaml
+        - Procfile
+        - .env

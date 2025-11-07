@@ -1,60 +1,91 @@
-// ============================================
-// popup.js - Neuraluxe-AI Premium Popup Module
-// Fully independent, stackable, animated
-// ============================================
+// ===========================================================
+// Neuraluxe-AI v10k Hyperluxe — popup.js
+// Independent smart notifications & AI popups
+// ===========================================================
 
-export default class Popup {
-    constructor(containerId = "popup-container") {
-        this.container = document.getElementById(containerId);
-        if (!this.container) {
-            this.container = document.createElement("div");
-            this.container.id = containerId;
-            this.container.style.position = "fixed";
-            this.container.style.top = "20px";
-            this.container.style.right = "20px";
-            this.container.style.zIndex = "9999";
-            this.container.style.display = "flex";
-            this.container.style.flexDirection = "column";
-            this.container.style.gap = "10px";
-            document.body.appendChild(this.container);
-        }
+class NeuraluxePopup {
+    constructor() {
+        this.activePopups = [];
+        this.container = this._createContainer();
+        document.body.appendChild(this.container);
     }
 
-    show(message, type = "info", duration = 3000) {
-        const popup = document.createElement("div");
-        popup.innerText = message;
-        popup.style.background = type === "error" ? "#e74c3c" :
-                                 type === "success" ? "#2ecc71" :
-                                 "#3498db";
-        popup.style.color = "#fff";
-        popup.style.padding = "14px 22px";
-        popup.style.borderRadius = "12px";
-        popup.style.boxShadow = "0 4px 10px rgba(0,0,0,0.3)";
-        popup.style.fontFamily = "Arial, sans-serif";
-        popup.style.fontWeight = "600";
-        popup.style.cursor = "pointer";
-        popup.style.opacity = "0";
-        popup.style.transform = "translateX(50px)";
-        popup.style.transition = "all 0.4s ease";
+    _createContainer() {
+        const div = document.createElement('div');
+        div.id = 'neuraluxe-popup-container';
+        div.style.position = 'fixed';
+        div.style.bottom = '20px';
+        div.style.right = '20px';
+        div.style.width = '300px';
+        div.style.maxWidth = '90vw';
+        div.style.zIndex = '9999';
+        div.style.fontFamily = 'sans-serif';
+        return div;
+    }
 
-        popup.addEventListener("click", () => {
-            popup.style.opacity = "0";
-            popup.style.transform = "translateX(50px)";
-            setTimeout(() => this.container.removeChild(popup), 400);
-        });
+    _createPopup(message, type = 'info') {
+        const popup = document.createElement('div');
+        popup.className = `neuraluxe-popup ${type}`;
+        popup.style.background = type === 'error' ? '#ff4d4f' : type === 'success' ? '#52c41a' : '#1890ff';
+        popup.style.color = '#fff';
+        popup.style.padding = '12px 18px';
+        popup.style.marginTop = '10px';
+        popup.style.borderRadius = '8px';
+        popup.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        popup.style.transition = 'all 0.4s ease';
+        popup.style.opacity = '0';
+        popup.innerText = message;
 
         this.container.appendChild(popup);
-        requestAnimationFrame(() => {
-            popup.style.opacity = "1";
-            popup.style.transform = "translateX(0)";
-        });
+        this.activePopups.push(popup);
 
+        // Animate in
         setTimeout(() => {
-            popup.style.opacity = "0";
-            popup.style.transform = "translateX(50px)";
-            setTimeout(() => {
-                if (popup.parentNode) this.container.removeChild(popup);
-            }, 400);
-        }, duration);
+            popup.style.opacity = '1';
+            popup.style.transform = 'translateY(0)';
+        }, 50);
+
+        // Auto-remove
+        setTimeout(() => this._removePopup(popup), 5000);
+
+        return popup;
+    }
+
+    _removePopup(popup) {
+        popup.style.opacity = '0';
+        popup.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            this.container.removeChild(popup);
+            this.activePopups = this.activePopups.filter(p => p !== popup);
+        }, 400);
+    }
+
+    info(message) {
+        return this._createPopup(message, 'info');
+    }
+
+    success(message) {
+        return this._createPopup(message, 'success');
+    }
+
+    error(message) {
+        return this._createPopup(message, 'error');
+    }
+
+    notifyAIResponse(prompt, response) {
+        this.info(`You: ${prompt}`);
+        this.success(`AI: ${response}`);
     }
 }
+
+// ===============================
+// USAGE EXAMPLE (independent)
+// ===============================
+const Neuraluxe = new NeuraluxePopup();
+
+// Example popup triggers
+// Neuraluxe.info("Loading AI...");
+// Neuraluxe.success("AI ready!");
+// Neuraluxe.error("Failed to fetch data!");
+
+// Neuraluxe.notifyAIResponse("Hello AI", "Hello, human! Ready to assist.");
