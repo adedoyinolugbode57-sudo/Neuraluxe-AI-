@@ -1,0 +1,32 @@
+# ===========================================================
+# 🌌 Neuraluxe-AI (Deployra Optimized Dockerfile)
+# ===========================================================
+
+# Use a small, stable Python base image
+FROM python:3.10-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements first for caching
+COPY requirements.txt .
+
+# Install dependencies
+RUN pip install --no-cache-dir --upgrade pip \
+ && pip install --no-cache-dir -r requirements.txt
+
+# Copy all project files
+COPY . .
+
+# Environment setup
+ENV FLASK_ENV=production
+ENV PORT=80
+ENV OPENAI_ENABLED=false
+ENV ENABLE_ENV_CHECK=true
+ENV PYTHONUNBUFFERED=1
+
+# Expose port 80
+EXPOSE 80
+
+# Start Gunicorn
+CMD ["gunicorn", "main:app", "--workers=4", "--threads=8", "--timeout=120", "--bind=0.0.0.0:80"]

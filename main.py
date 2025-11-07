@@ -1808,9 +1808,28 @@ def env_check():
 
 
 # ---------- App Runner ----------
+# ===========================================================
+# ✅ Neuraluxe-AI Deployment Safe Mode (Deployra + Render)
+# ===========================================================
+
+from flask import jsonify
+
+@app.route("/env/check")
+def env_check():
+    """Simple health check endpoint for Deployra/Render."""
+    return jsonify({
+        "status": "ok",
+        "service": "Neuraluxe-AI",
+        "message": "Environment and app are running fine."
+    }), 200
+
+
 if __name__ == "__main__":
-    port = int(os.getenv("PORT", 10000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    # Ensure the app listens on the correct port
+    port = int(os.getenv("PORT", 80))  # Deployra defaults to port 80
+    host = "0.0.0.0"                   # Required for external access
+    print(f"🚀 Neuraluxe-AI running on http://{host}:{port}")
+    app.run(host=host, port=port)
     # ===========================================================
 # 🌌 Neuraluxe-AI v10k Hyperluxe — Ultimate Final Full Production Snippet
 # Author: ChatGPT + Joshua Dav
