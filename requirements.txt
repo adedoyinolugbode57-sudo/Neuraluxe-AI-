@@ -1,55 +1,94 @@
+# --- Flask Core ---
 Flask>=2.2
 Flask-Cors
 Flask-Caching
 Flask-SQLAlchemy
+
+# --- Environment & Config ---
 python-dotenv
 requests
 httpx
+
+# --- Data Handling & Utilities ---
 pandas
 numpy
 beautifulsoup4
 lxml
 schedule
 pytz
+
+# --- Database & Async ---
 SQLAlchemy
 psycopg2-binary
 asyncpg
+aiopg
+
+# --- AI / NLP Essentials ---
 scikit-learn
 nltk
 textblob
 emoji
 spacy
+transformers
+torch
+
+# --- Voice & Speech ---
 gTTS
 pyttsx3
 edge-tts
 pydub
+
+# --- Background Tasks & Performance ---
 redis
 rq
 apscheduler
+celery
+
+# --- Security & Auth ---
 itsdangerous
 bcrypt
 cryptography
+
+# --- Web & API Tools ---
 aiohttp
 uvicorn
 gunicorn
+httpx
+
+# --- Dev & Diagnostics ---
 colorama
 loguru
+psutil
+
+# --- Optional Enhancements / Finance & Crypto ---
 coingecko
 yfinance
 requests-cache
+
+# --- For News, Health, and Data APIs ---
 feedparser
 openmeteo-requests
 json5
+
+# --- Compression & Optimization ---
 brotli
 zstandard
+
+# --- File Handling & Parsing ---
 python-docx
 pdfminer.six
 pypdf2
 openpyxl
+
+# --- Image, Video, and Media ---
 pillow
 opencv-python-headless
 moviepy
+
+# --- Testing & Debugging ---
 pytest
 pytest-asyncio
+
+# --- CLI & Display Tools ---
 click
 rich

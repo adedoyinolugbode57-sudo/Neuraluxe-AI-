@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  neuraluxe-ai:
+    build: .
+    container_name: neuraluxe-ai
+    ports:
+      - "10000:10000"
+    environment:
+      FLASK_ENV: production
+      PORT: 10000
+      OPENAI_ENABLED: "false"
+      CACHE_TYPE: simple
+      LOG_LEVEL: info
+      ENABLE_ENV_CHECK: "true"
+      DATABASE_URL: postgresql://postgres:password@db:5432/neuraluxe
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+    restart: unless-stopped
+
+  db:
+    image: postgres:15
+    container_name: neuraluxe-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: neuraluxe
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    container_name: neuraluxe-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+
+volumes:
+  db_data:
